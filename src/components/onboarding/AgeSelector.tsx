@@ -34,7 +34,7 @@ export function AgeSelector({ onNext }: AgeSelectorProps) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="w-full max-w-sm p-4 rounded-2xl bg-card border border-border shadow-sm"
+        className="w-full max-w-sm p-4 rounded-xl bg-card border border-border shadow-sm"
       >
         <p className="text-center text-lg font-medium text-foreground">
           How old are you, {studentName}?
@@ -82,7 +82,7 @@ export function AgeSelector({ onNext }: AgeSelectorProps) {
         transition={{ delay: 0.8 }}
         whileTap={{ scale: 0.97 }}
         onClick={onNext}
-        className="w-full max-w-sm h-14 rounded-full bg-primary text-white font-semibold text-lg hover:bg-primary-dark transition-colors"
+        className="w-full max-w-sm h-14 rounded-xl bg-primary text-white font-semibold text-lg hover:bg-primary-dark transition-colors"
       >
         Let&apos;s Go!
       </motion.button>

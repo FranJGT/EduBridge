@@ -24,7 +24,7 @@ export function SplashLanguage({ onNext }: SplashLanguageProps) {
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-success/10 text-success text-xs font-semibold"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-success/10 text-success text-xs font-semibold"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
           <line x1="1" y1="1" x2="23" y2="23" />
@@ -87,7 +87,7 @@ export function SplashLanguage({ onNext }: SplashLanguageProps) {
             transition={{ delay: 0.6 + i * 0.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => handleSelect(lang.code)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
               language === lang.code
                 ? "bg-primary text-white shadow-md"
                 : "bg-card border border-border text-foreground hover:border-primary/50 shadow-sm"

@@ -36,7 +36,7 @@ export function FeedbackPanel({
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className={`inline-flex items-center justify-center w-24 h-24 rounded-full text-4xl ${
+          className={`inline-flex items-center justify-center w-24 h-24 rounded-xl text-4xl ${
             feedback.isCorrect
               ? "bg-success/10 text-success"
               : "bg-secondary/10 text-secondary"
@@ -79,7 +79,7 @@ export function FeedbackPanel({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-secondary/10 text-secondary"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" />
@@ -94,7 +94,7 @@ export function FeedbackPanel({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-secondary/10 text-secondary"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" />
@@ -153,7 +153,7 @@ export function FeedbackPanel({
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={onNext}
-            className="w-full h-14 rounded-full bg-primary text-white text-lg font-semibold hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
+            className="w-full h-14 rounded-xl bg-primary text-white text-lg font-semibold hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
           >
             {t("student.nextProblem", language)}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -165,14 +165,14 @@ export function FeedbackPanel({
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={onRetry}
-              className="flex-1 h-14 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
+              className="flex-1 h-14 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
             >
               {t("student.tryAgain", language)}
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={onNext}
-              className="flex-1 h-14 rounded-full border border-border text-foreground font-medium hover:bg-card transition-colors"
+              className="flex-1 h-14 rounded-xl border border-border text-foreground font-medium hover:bg-card transition-colors"
             >
               {t("student.nextProblem", language)}
             </motion.button>

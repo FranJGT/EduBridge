@@ -56,10 +56,10 @@ export function MasteryCelebration({
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className="w-32 h-32 rounded-full bg-card flex items-center justify-center shadow-lg"
+        className="w-32 h-32 rounded-xl bg-card flex items-center justify-center shadow-lg"
         style={{ boxShadow: "0 0 40px rgba(212,145,58,0.3)" }}
       >
-        <div className="w-24 h-24 rounded-full bg-gradient-to-b from-[#F5D76E] to-[#D4913A] flex flex-col items-center justify-center">
+        <div className="w-24 h-24 rounded-xl bg-gradient-to-b from-[#F5D76E] to-[#D4913A] flex flex-col items-center justify-center">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="white">
             <path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" />
           </svg>
@@ -130,7 +130,7 @@ export function MasteryCelebration({
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1 }}
         onClick={() => onContinue(nextTopic || topic)}
-        className="w-full max-w-sm h-14 rounded-full bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
+        className="w-full max-w-sm h-14 rounded-xl bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
       >
         {nextRegionName
           ? t("mastery.explore", language).replace("{region}", nextRegionName)

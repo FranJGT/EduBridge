@@ -34,9 +34,9 @@ export function SpeechBubble({
 
   return (
     <div
-      className={`flex items-start gap-3 p-4 rounded-2xl bg-card border border-border shadow-sm ${className}`}
+      className={`flex items-start gap-3 p-4 rounded-xl bg-card border border-border shadow-sm ${className}`}
     >
-      <div className="w-9 h-9 rounded-full bg-surface-secondary flex items-center justify-center shrink-0">
+      <div className="w-9 h-9 rounded-xl bg-surface-secondary flex items-center justify-center shrink-0">
         <svg width="18" height="18" viewBox="0 0 120 120" fill="none">
           <ellipse cx="60" cy="66" rx="36" ry="34" fill="#7D6B3D" />
           <ellipse cx="60" cy="62" rx="24" ry="22" fill="#C4A96A" />

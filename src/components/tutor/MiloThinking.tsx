@@ -37,7 +37,7 @@ export function MiloThinking() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="w-full max-w-sm p-6 rounded-2xl bg-card border border-border shadow-sm"
+        className="w-full max-w-sm p-6 rounded-xl bg-card border border-border shadow-sm"
       >
         <h3 className="text-lg font-bold text-primary text-center mb-5">
           {t("thinking.title", language)}
@@ -57,9 +57,9 @@ export function MiloThinking() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               ) : i === activeStep ? (
-                <div className="w-5 h-5 rounded-full border-2 border-primary border-t-transparent animate-spin shrink-0" />
+                <div className="w-5 h-5 rounded-xl border-2 border-primary border-t-transparent animate-spin shrink-0" />
               ) : (
-                <div className="w-5 h-5 rounded-full border-2 border-border shrink-0" />
+                <div className="w-5 h-5 rounded-xl border-2 border-border shrink-0" />
               )}
               <span className={`text-sm ${i < activeStep ? "text-foreground" : i === activeStep ? "text-primary font-medium" : "text-muted"}`}>
                 {step}

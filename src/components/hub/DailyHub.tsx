@@ -50,7 +50,7 @@ export function DailyHub({ onNavigate }: DailyHubProps) {
       {/* Header stats */}
       <motion.div variants={item} className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold">
+          <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center text-lg font-bold">
             {studentName?.[0]?.toUpperCase() || "?"}
           </div>
           <div>
@@ -98,7 +98,7 @@ export function DailyHub({ onNavigate }: DailyHubProps) {
         variants={item}
         whileTap={{ scale: 0.97 }}
         onClick={() => onNavigate("journey")}
-        className="flex items-center justify-center gap-3 h-16 rounded-2xl bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary-dark transition-colors"
+        className="flex items-center justify-center gap-3 h-16 rounded-xl bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary-dark transition-colors"
         style={{ boxShadow: "0 6px 20px rgba(125,107,61,0.3)" }}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -117,7 +117,7 @@ export function DailyHub({ onNavigate }: DailyHubProps) {
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={() => onNavigate("scan")}
-          className="flex flex-col items-center justify-center gap-2 p-5 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors"
+          className="flex flex-col items-center justify-center gap-2 p-5 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors"
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
             <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
@@ -128,7 +128,7 @@ export function DailyHub({ onNavigate }: DailyHubProps) {
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={() => onNavigate("quickPractice")}
-          className="flex flex-col items-center justify-center gap-2 p-5 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors"
+          className="flex flex-col items-center justify-center gap-2 p-5 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors"
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />

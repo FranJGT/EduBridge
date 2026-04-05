@@ -91,7 +91,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
         {DIAGNOSTIC_PROBLEMS.map((_, i) => (
           <div
             key={i}
-            className={`flex-1 h-1.5 rounded-full transition-colors ${
+            className={`flex-1 h-1.5 rounded-xl transition-colors ${
               i < results.length
                 ? results[i]?.correct
                   ? "bg-success"
@@ -116,7 +116,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
-          className="w-full max-w-sm p-6 rounded-2xl bg-card border border-border shadow-md text-center"
+          className="w-full max-w-sm p-6 rounded-xl bg-card border border-border shadow-md text-center"
         >
           <p className="text-xs font-semibold text-primary tracking-wider uppercase mb-2">
             {current.topic}
@@ -132,7 +132,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
         onChange={(e) => setAnswer(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && answer.trim() && handleCheck()}
         placeholder=""
-        className="w-40 h-16 rounded-2xl border-2 border-primary bg-card text-2xl font-bold text-center text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+        className="w-40 h-16 rounded-xl border-2 border-primary bg-card text-2xl font-bold text-center text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
         autoFocus
       />
 
@@ -141,7 +141,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
           whileTap={{ scale: 0.97 }}
           onClick={handleCheck}
           disabled={!answer.trim()}
-          className="flex-1 h-14 rounded-full bg-primary text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-40"
+          className="flex-1 h-14 rounded-xl bg-primary text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-40"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <polyline points="20 6 9 17 4 12" />
@@ -151,7 +151,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={handleSkip}
-          className="flex-1 h-14 rounded-full border border-border text-muted font-medium hover:bg-card transition-colors"
+          className="flex-1 h-14 rounded-xl border border-border text-muted font-medium hover:bg-card transition-colors"
         >
           Not sure? Skip
         </motion.button>

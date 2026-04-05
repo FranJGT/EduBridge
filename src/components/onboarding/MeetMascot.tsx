@@ -45,7 +45,7 @@ export function MeetMascot({ onNext }: MeetMascotProps) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="w-full max-w-sm p-5 rounded-2xl bg-card border border-border shadow-sm"
+        className="w-full max-w-sm p-5 rounded-xl bg-card border border-border shadow-sm"
       >
         <p className="text-center text-base text-foreground leading-relaxed">
           {t("onboarding.nameLabel", language) === "onboarding.nameLabel"
@@ -74,7 +74,7 @@ export function MeetMascot({ onNext }: MeetMascotProps) {
         whileTap={{ scale: 0.97 }}
         onClick={handleContinue}
         disabled={!name.trim()}
-        className="w-full max-w-sm h-14 rounded-full bg-primary text-white font-semibold text-lg hover:bg-primary-dark transition-colors disabled:opacity-40"
+        className="w-full max-w-sm h-14 rounded-xl bg-primary text-white font-semibold text-lg hover:bg-primary-dark transition-colors disabled:opacity-40"
       >
         {t("onboarding.start", language) === "onboarding.start"
           ? "Continue"
