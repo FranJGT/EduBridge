@@ -1,54 +1,61 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "motion/react";
 import { useStudentStore } from "@/stores/student-store";
-import { getStudentSkills, TOPICS, REGION_NAMES } from "@/lib/adaptive/engine";
+import {
+  getStudentSkills,
+  TOPICS,
+  REGION_NAMES,
+  TOPIC_PREREQUISITES,
+} from "@/lib/adaptive/engine";
 import { Nuri } from "@/components/shared/Nuri";
 import { t } from "@/lib/i18n";
 import type { SkillRecord } from "@/lib/db/local";
 
+// Heritage Warmth-tinted region colors (warm-shifted, not stock Tailwind)
 const REGION_STYLE: Record<
   string,
   { bg: string; color: string; gradFrom: string; gradTo: string; symbol: string }
 > = {
-  addition: { bg: "#E2F0D9", color: "#5A8C4E", gradFrom: "#7BC97B", gradTo: "#5A8C4E", symbol: "+" },
-  subtraction: { bg: "#E0EFFF", color: "#3B82F6", gradFrom: "#60A5FA", gradTo: "#3B82F6", symbol: "\u2212" },
-  multiplication: { bg: "#F0ECFF", color: "#8B5CF6", gradFrom: "#A78BFA", gradTo: "#8B5CF6", symbol: "\u00D7" },
-  division: { bg: "#FEF3C7", color: "#F59E0B", gradFrom: "#FCD34D", gradTo: "#F59E0B", symbol: "\u00F7" },
-  fractions: { bg: "#D1FAE5", color: "#10B981", gradFrom: "#34D399", gradTo: "#10B981", symbol: "\u00BD" },
-  "word-problems": { bg: "#FCE7F3", color: "#EC4899", gradFrom: "#F9A8D4", gradTo: "#EC4899", symbol: "\u270D" },
-  algebra: { bg: "#EDE9FE", color: "#7C3AED", gradFrom: "#C4B5FD", gradTo: "#7C3AED", symbol: "x" },
+  addition: { bg: "#E6EDDB", color: "#6B8C4E", gradFrom: "#8CB86E", gradTo: "#6B8C4E", symbol: "+" },
+  subtraction: { bg: "#DDE6EF", color: "#5A7A9B", gradFrom: "#7FA3C2", gradTo: "#5A7A9B", symbol: "\u2212" },
+  multiplication: { bg: "#E8E0F0", color: "#7B6B9E", gradFrom: "#9B8BBF", gradTo: "#7B6B9E", symbol: "\u00D7" },
+  division: { bg: "#F0E8D8", color: "#B8863A", gradFrom: "#D4A85C", gradTo: "#B8863A", symbol: "\u00F7" },
+  fractions: { bg: "#DBE8E2", color: "#5A8C7A", gradFrom: "#7BB8A0", gradTo: "#5A8C7A", symbol: "\u00BD" },
+  "word-problems": { bg: "#EDDDDF", color: "#A06B70", gradFrom: "#C49298", gradTo: "#A06B70", symbol: "\u270D" },
+  algebra: { bg: "#E2DCED", color: "#6E5A9E", gradFrom: "#9484BF", gradTo: "#6E5A9E", symbol: "x" },
 };
 
-const PREREQS: Record<string, string[]> = {
-  addition: [],
-  subtraction: ["addition"],
-  multiplication: ["addition"],
-  division: ["multiplication"],
-  fractions: ["division"],
-  "word-problems": ["addition", "subtraction"],
-  algebra: ["fractions", "multiplication"],
-};
-
-// Zigzag x positions for nodes on the path
-const NODE_X = [0.2, 0.35, 0.5, 0.65, 0.8, 0.65, 0.5, 0.35, 0.2, 0.35];
+// Zigzag positions for nodes (x as %, y offset)
+const NODE_POSITIONS = [
+  { x: 18, y: 8 }, { x: 32, y: 50 }, { x: 48, y: 12 },
+  { x: 62, y: 48 }, { x: 78, y: 10 }, { x: 68, y: 52 },
+];
 
 interface JourneyMapProps {
   onSelectTopic: (topic: string) => void;
 }
 
 export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
-  const { studentId, worldProgress, language } = useStudentStore();
+  const { studentId, worldProgress, language, totalStars } = useStudentStore();
   const [skills, setSkills] = useState<SkillRecord[]>([]);
+  const currentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!studentId) return;
     getStudentSkills(studentId).then(setSkills);
   }, [studentId]);
 
+  // Auto-scroll to current region
+  useEffect(() => {
+    if (skills.length > 0 && currentRef.current) {
+      currentRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [skills]);
+
   const isUnlocked = (topic: string) => {
-    const prereqs = PREREQS[topic] || [];
+    const prereqs = TOPIC_PREREQUISITES[topic] || [];
     return prereqs.every((p) => {
       const skill = skills.find((s) => s.topic === p);
       return skill && skill.level >= 3;
@@ -58,7 +65,7 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
   return (
     <div className="flex-1 flex flex-col pb-28 overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between px-5 pt-14 pb-3">
+      <div className="flex items-center justify-between px-6 pt-14 pb-3">
         <h2
           className="text-lg font-bold text-foreground"
           style={{ fontFamily: "var(--font-funnel-sans, var(--font-sans))" }}
@@ -69,9 +76,7 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--secondary)" aria-hidden="true">
             <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" />
           </svg>
-          <span className="text-sm font-bold text-foreground">
-            {useStudentStore.getState().totalStars}
-          </span>
+          <span className="text-sm font-bold text-foreground">{totalStars}</span>
         </div>
       </div>
 
@@ -83,36 +88,34 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
         const progress = worldProgress[topic] || 0;
         const unlocked = isUnlocked(topic);
         const regionName = REGION_NAMES[topic];
-        const nodesCount = Math.min(progress + 2, 6); // Show up to 6 visible nodes
+        const isCurrentRegion = unlocked && progress < 10;
+        const nodesCount = Math.min(progress + 2, 6);
 
         return (
           <motion.div
             key={topic}
+            ref={isCurrentRegion ? currentRef : undefined}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: unlocked ? 1 : 0.5, y: 0 }}
-            transition={{ delay: regionIdx * 0.08 }}
+            animate={{ opacity: unlocked ? 1 : 0.45, y: 0 }}
+            transition={{ delay: regionIdx * 0.06 }}
             className="relative"
             style={{
-              background: `linear-gradient(180deg, ${style.bg}FF 0%, ${style.bg}88 100%)`,
-              minHeight: unlocked ? 160 : 120,
-              cursor: unlocked ? "pointer" : "default",
+              background: `linear-gradient(180deg, ${style.bg} 0%, ${style.bg}88 100%)`,
+              minHeight: unlocked ? 190 : 110,
+              filter: unlocked ? "none" : "grayscale(0.6)",
             }}
-            onClick={() => unlocked && onSelectTopic(topic)}
           >
             {/* Region title + icon */}
-            <div className="flex items-start justify-between px-5 pt-3">
+            <div className="flex items-start justify-between px-6 pt-3">
               <div>
-                <p
-                  className="text-xs font-bold tracking-wider"
-                  style={{ color: style.color }}
-                >
+                <p className="text-xs font-bold tracking-wider uppercase" style={{ color: style.color }}>
                   {regionName}
                 </p>
                 {!unlocked && (
                   <p className="text-[10px] text-muted mt-0.5">
                     {t("journey.unlockRequires", language).replace(
                       "{region}",
-                      PREREQS[topic]?.map((p) => REGION_NAMES[p]).join(" & ") || ""
+                      (TOPIC_PREREQUISITES[topic] || []).map((p) => REGION_NAMES[p]).join(" & ")
                     )}
                   </p>
                 )}
@@ -121,38 +124,42 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
                 className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md"
                 style={{
                   background: `linear-gradient(180deg, ${style.gradFrom}, ${style.gradTo})`,
-                  opacity: unlocked ? 1 : 0.4,
+                  opacity: unlocked ? 1 : 0.3,
                 }}
               >
                 <span className="text-white text-2xl font-bold">{style.symbol}</span>
               </div>
             </div>
 
-            {/* Path with nodes */}
+            {/* Path with nodes — unlocked regions */}
             {unlocked && (
-              <div className="relative h-20 mx-4 mt-1">
-                {/* Dashed connections */}
+              <div className="relative mx-6 mt-2" style={{ height: 100 }}>
+                {/* Curved SVG path */}
                 <svg
                   className="absolute inset-0 w-full h-full"
-                  viewBox="0 0 350 80"
+                  viewBox="0 0 320 100"
                   fill="none"
                   aria-hidden="true"
+                  preserveAspectRatio="none"
                 >
                   {Array.from({ length: nodesCount - 1 }, (_, i) => {
-                    const x1 = NODE_X[i] * 350;
-                    const y1 = 20 + (i % 2 === 0 ? 0 : 20);
-                    const x2 = NODE_X[i + 1] * 350;
-                    const y2 = 20 + ((i + 1) % 2 === 0 ? 0 : 20);
+                    const p1 = NODE_POSITIONS[i];
+                    const p2 = NODE_POSITIONS[i + 1];
+                    const x1 = (p1.x / 100) * 320;
+                    const y1 = p1.y + 20;
+                    const x2 = (p2.x / 100) * 320;
+                    const y2 = p2.y + 20;
+                    const cpx = (x1 + x2) / 2;
+                    const cpy = Math.min(y1, y2) - 15;
+                    const completed = i < progress;
                     return (
-                      <line
+                      <path
                         key={i}
-                        x1={x1}
-                        y1={y1}
-                        x2={x2}
-                        y2={y2}
-                        stroke={i < progress ? `${style.color}88` : "#DCD8CB88"}
-                        strokeWidth="2"
-                        strokeDasharray="6 4"
+                        d={`M${x1},${y1} Q${cpx},${cpy} ${x2},${y2}`}
+                        stroke={completed ? `${style.color}77` : "var(--border)"}
+                        strokeWidth="2.5"
+                        strokeDasharray="7 5"
+                        strokeLinecap="round"
                       />
                     );
                   })}
@@ -162,63 +169,84 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
                 {Array.from({ length: nodesCount }, (_, i) => {
                   const isCompleted = i < progress;
                   const isCurrent = i === progress;
-                  const x = NODE_X[i] * 100;
-                  const y = i % 2 === 0 ? 10 : 30;
-                  const size = isCurrent ? 42 : isCompleted ? 36 : 30;
+                  const pos = NODE_POSITIONS[i];
+                  const size = 48;
 
                   return (
                     <div
                       key={i}
-                      className="absolute flex items-center justify-center"
+                      className="absolute flex flex-col items-center"
                       style={{
-                        left: `${x}%`,
-                        top: y,
+                        left: `${pos.x}%`,
+                        top: pos.y,
                         width: size,
-                        height: size,
                         transform: "translateX(-50%)",
                       }}
                     >
-                      {/* Current node — Nuri sits above */}
+                      {/* Nuri bouncing on current node */}
                       {isCurrent && (
-                        <div className="absolute -top-9">
-                          <Nuri expression="happy" size={32} />
-                        </div>
+                        <motion.div
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut" }}
+                          className="mb-1"
+                        >
+                          <Nuri expression="happy" size={40} />
+                        </motion.div>
                       )}
-                      <div
-                        className="w-full h-full rounded-full flex items-center justify-center"
+
+                      {/* Node circle */}
+                      <motion.button
+                        whileTap={isCurrent ? { scale: 0.9 } : {}}
+                        onClick={() => isCurrent && onSelectTopic(topic)}
+                        disabled={!isCurrent}
+                        animate={
+                          isCurrent
+                            ? {
+                                boxShadow: [
+                                  `0 0 12px ${style.color}44`,
+                                  `0 0 24px ${style.color}88`,
+                                  `0 0 12px ${style.color}44`,
+                                ],
+                              }
+                            : {}
+                        }
+                        transition={isCurrent ? { repeat: Infinity, duration: 1.5 } : {}}
+                        className="flex items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-primary"
                         style={{
+                          width: size,
+                          height: size,
                           backgroundColor: isCompleted
                             ? style.color
                             : isCurrent
-                              ? "#FFFFFF"
-                              : "#E8E4D8",
+                              ? "var(--card)"
+                              : "var(--surface-secondary)",
                           border: isCurrent
                             ? `3px solid ${style.color}`
                             : isCompleted
-                              ? "3px solid #FFFFFF"
-                              : "2px solid #DCD8CB",
-                          boxShadow: isCurrent
-                            ? `0 0 16px ${style.color}55`
-                            : "none",
+                              ? "3px solid var(--card)"
+                              : "2px solid var(--border)",
                         }}
+                        aria-label={
+                          isCompleted
+                            ? `${t("topics." + topic, language)} ${i + 1} - ${t("student.correct", language)}`
+                            : isCurrent
+                              ? `${t("topics." + topic, language)} ${i + 1} - ${t("student.submit", language)}`
+                              : `${t("topics." + topic, language)} ${i + 1}`
+                        }
                       >
                         {isCompleted ? (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden="true">
                             <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" />
                           </svg>
-                        ) : isCurrent ? (
+                        ) : (
                           <span
-                            className="text-xs font-bold"
-                            style={{ color: style.color }}
+                            className="text-sm font-bold"
+                            style={{ color: isCurrent ? style.color : "var(--muted)" }}
                           >
                             {i + 1}
                           </span>
-                        ) : (
-                          <span className="text-[10px] font-semibold text-muted">
-                            {i + 1}
-                          </span>
                         )}
-                      </div>
+                      </motion.button>
                     </div>
                   );
                 })}
@@ -227,26 +255,25 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
 
             {/* Locked nodes */}
             {!unlocked && (
-              <div className="flex gap-3 px-5 mt-4 items-center">
+              <div className="flex gap-4 px-6 mt-3 items-center">
                 {[0, 1, 2].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full bg-surface-secondary border-2 border-border flex items-center justify-center"
+                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: "var(--surface-secondary)", border: "2px solid var(--border)" }}
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                       <rect x="3" y="11" width="18" height="11" rx="2" />
                       <path d="M7 11V7a5 5 0 0110 0v4" />
                     </svg>
                   </div>
                 ))}
-                <div className="w-6 h-0.5 bg-border rounded-full" />
-                <div className="w-6 h-0.5 bg-border rounded-full" />
               </div>
             )}
 
             {/* Progress bar */}
             {unlocked && (
-              <div className="flex items-center gap-2 px-5 pb-3 mt-1">
+              <div className="flex items-center gap-2 px-6 pb-3 mt-1">
                 <div className="flex gap-1">
                   {Array.from({ length: 6 }, (_, i) => (
                     <div
@@ -254,17 +281,12 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
                       className="w-4 h-1.5 rounded-full"
                       style={{
                         backgroundColor:
-                          i < Math.ceil((progress / 10) * 6)
-                            ? style.color
-                            : "#DCD8CB",
+                          i < Math.ceil((progress / 10) * 6) ? style.color : "var(--border)",
                       }}
                     />
                   ))}
                 </div>
-                <span
-                  className="text-xs font-medium"
-                  style={{ color: style.color }}
-                >
+                <span className="text-xs font-medium" style={{ color: style.color }}>
                   {progress}/10 &middot; {Math.round(accuracy * 100)}%
                 </span>
               </div>

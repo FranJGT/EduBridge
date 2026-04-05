@@ -23,7 +23,7 @@ export const REGION_NAMES: Record<string, string> = {
   algebra: "Algebra Peak",
 };
 
-const TOPIC_PREREQUISITES: Record<string, string[]> = {
+export const TOPIC_PREREQUISITES: Record<string, string[]> = {
   addition: [],
   subtraction: ["addition"],
   multiplication: ["addition"],

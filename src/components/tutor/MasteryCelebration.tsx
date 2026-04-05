@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 import { REGION_NAMES, getNextRegion } from "@/lib/adaptive/engine";
 import { SpeechBubble } from "@/components/shared/SpeechBubble";
+import { useStudentStore } from "@/stores/student-store";
+import { t } from "@/lib/i18n";
 
 interface MasteryCelebrationProps {
   topic: string;
@@ -21,6 +23,7 @@ export function MasteryCelebration({
   studentName,
   onContinue,
 }: MasteryCelebrationProps) {
+  const language = useStudentStore((s) => s.language);
   const regionName = REGION_NAMES[topic] || topic;
   const nextTopic = getNextRegion(topic);
   const nextRegionName = nextTopic ? REGION_NAMES[nextTopic] : null;
@@ -61,7 +64,7 @@ export function MasteryCelebration({
             <path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" />
           </svg>
           <span className="text-[10px] font-bold text-white tracking-widest">
-            MASTER
+            {t("mastery.master", language)}
           </span>
         </div>
       </motion.div>
@@ -76,7 +79,7 @@ export function MasteryCelebration({
         <h2 className="text-2xl font-bold text-foreground">
           {regionName}
         </h2>
-        <p className="text-2xl font-bold text-foreground">Complete!</p>
+        <p className="text-2xl font-bold text-foreground">{t("mastery.complete", language)}</p>
       </motion.div>
 
       {/* Stats */}
@@ -86,9 +89,9 @@ export function MasteryCelebration({
         transition={{ delay: 0.5 }}
         className="flex gap-3 w-full max-w-sm"
       >
-        <StatCard value={`${Math.round(accuracy * 100)}%`} label="Accuracy" color="text-success" />
-        <StatCard value={`${totalProblems}`} label="Problems" color="text-secondary" />
-        <StatCard value={`${bestStreak}`} label="Best Streak" color="text-[#F59E0B]" />
+        <StatCard value={`${Math.round(accuracy * 100)}%`} label={t("student.accuracy", language)} color="text-success" />
+        <StatCard value={`${totalProblems}`} label={t("student.problems", language)} color="text-secondary" />
+        <StatCard value={`${bestStreak}`} label={t("student.bestStreak", language)} color="text-secondary" />
       </motion.div>
 
       {/* Nuri message */}
@@ -109,14 +112,14 @@ export function MasteryCelebration({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9 }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#3B82F615] text-[#3B82F6]"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-success/10 text-success"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
             <path d="M7 11V7a5 5 0 0110 0v4" />
           </svg>
           <span className="text-sm font-semibold">
-            {nextRegionName} is now unlocked!
+            {t("mastery.unlocked", language).replace("{region}", nextRegionName || "")}
           </span>
         </motion.div>
       )}
@@ -129,7 +132,9 @@ export function MasteryCelebration({
         onClick={() => onContinue(nextTopic || topic)}
         className="w-full max-w-sm h-14 rounded-full bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
       >
-        {nextRegionName ? `Explore ${nextRegionName}` : "Continue Practicing"}
+        {nextRegionName
+          ? t("mastery.explore", language).replace("{region}", nextRegionName)
+          : t("mastery.continuePractice", language)}
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>

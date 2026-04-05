@@ -70,7 +70,7 @@ export function FeedbackPanel({
         >
           {feedback.isCorrect
             ? t("student.correct", language)
-            : "Almost!"}
+            : t("student.almost", language)}
         </motion.h2>
 
         {/* Stars reward */}
@@ -167,7 +167,7 @@ export function FeedbackPanel({
               onClick={onRetry}
               className="flex-1 h-14 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
             >
-              Try Again
+              {t("student.tryAgain", language)}
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.97 }}
@@ -182,7 +182,7 @@ export function FeedbackPanel({
           onClick={onTopics}
           className="w-full text-sm text-muted hover:text-foreground transition-colors"
         >
-          &larr; Back to topics
+          &larr; {t("feedback.backTopics", language)}
         </button>
       </motion.div>
     </div>
