@@ -74,7 +74,7 @@ export default function DashboardPage() {
           messages: [
             {
               role: "user",
-              content: `You are Nuri, an AI math tutor. Summarize this student's learning progress in 2 sentences for their parent/teacher:
+              content: `You are Milo, an AI math tutor. Summarize this student's learning progress in 2 sentences for their parent/teacher:
 Student: ${student.name}, Age: ${student.age}
 Strong topics: ${strongTopics || "none yet"}
 Weak topics: ${weakTopics || "none"}
@@ -259,7 +259,7 @@ function StudentDetail({
           </svg>
           <div>
             <p className="text-xs font-semibold text-secondary mb-1">
-              Nuri&apos;s AI Insight
+              Milo&apos;s AI Insight
             </p>
             <p className="text-sm text-foreground/80 leading-relaxed">
               {insight}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { useStudentStore } from "@/stores/student-store";
 import { t } from "@/lib/i18n";
 
@@ -21,7 +21,7 @@ export function AgeSelector({ onNext }: AgeSelectorProps) {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring" }}
       >
-        <Nuri expression="neutral" size={100} />
+        <Milo expression="neutral" size={100} />
       </motion.div>
 
       <motion.div

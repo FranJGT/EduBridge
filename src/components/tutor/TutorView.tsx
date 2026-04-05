@@ -6,7 +6,7 @@ import { useStudentStore } from "@/stores/student-store";
 import { ProblemCard } from "./ProblemCard";
 import { HandwritingCapture } from "./HandwritingCapture";
 import { FeedbackPanel } from "./FeedbackPanel";
-import { NuriThinking } from "./NuriThinking";
+import { MiloThinking } from "./MiloThinking";
 import { MasteryCelebration } from "./MasteryCelebration";
 import { DailyHub } from "@/components/hub/DailyHub";
 import { ProgressView } from "./ProgressView";
@@ -367,7 +367,7 @@ export function TutorView() {
 
           {view === "thinking" && (
             <motion.div key="thinking" className="flex-1 flex flex-col" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
-              <NuriThinking />
+              <MiloThinking />
             </motion.div>
           )}
 

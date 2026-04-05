@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { useStudentStore } from "@/stores/student-store";
 import { getStudentSkills, REGION_NAMES, TOPICS } from "@/lib/adaptive/engine";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { t } from "@/lib/i18n";
 import type { SkillRecord } from "@/lib/db/local";
 import { db } from "@/lib/db/local";
@@ -48,7 +48,7 @@ export function ProgressView() {
     >
       {/* Header */}
       <motion.div variants={item} className="flex items-center gap-4">
-        <Nuri expression="happy" size={56} />
+        <Milo expression="happy" size={56} />
         <div>
           <h1
             className="text-xl font-bold text-foreground"

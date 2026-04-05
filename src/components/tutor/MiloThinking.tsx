@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { useStudentStore } from "@/stores/student-store";
 import { t } from "@/lib/i18n";
 
-export function NuriThinking() {
+export function MiloThinking() {
   const language = useStudentStore((s) => s.language);
   const [activeStep, setActiveStep] = useState(0);
 
@@ -30,7 +30,7 @@ export function NuriThinking() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
-        <Nuri expression="thinking" size={100} />
+        <Milo expression="thinking" size={100} />
       </motion.div>
 
       <motion.div

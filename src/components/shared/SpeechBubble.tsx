@@ -11,7 +11,7 @@ interface SpeechBubbleProps {
 
 export function SpeechBubble({
   text,
-  label = "Nuri says:",
+  label = "Milo says:",
   typewriter = false,
   className = "",
 }: SpeechBubbleProps) {

@@ -94,7 +94,7 @@ export function MasteryCelebration({
         <StatCard value={`${bestStreak}`} label={t("student.bestStreak", language)} color="text-secondary" />
       </motion.div>
 
-      {/* Nuri message */}
+      {/* Milo message */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

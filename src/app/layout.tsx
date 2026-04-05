@@ -1,16 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono, Funnel_Sans } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const funnelSans = Funnel_Sans({
-  variable: "--font-funnel-sans",
-  subsets: ["latin"],
-  weight: ["400", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -19,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EduBridge - AI Tutor, Zero Internet",
+  title: "EduBridge - Math, Pair, and Beyond",
   description:
-    "Offline-first adaptive AI tutor powered by Gemma 4. Reads handwritten work, adapts to student level, works in 140+ languages.",
-  keywords: ["education", "AI tutor", "offline", "Gemma 4", "math"],
+    "AI-powered math learning from basics to university. Works offline. Powered by Gemma 4.",
+  keywords: ["education", "AI tutor", "math", "calculus", "algebra", "offline", "Gemma 4"],
   authors: [{ name: "EduBridge Team" }],
   appleWebApp: {
     capable: true,
@@ -35,7 +29,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#7D6B3D",
+  themeColor: "#4F46E5",
 };
 
 export default function RootLayout({
@@ -46,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${funnelSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <link rel="icon" href="/icons/icon-192x192.png" />

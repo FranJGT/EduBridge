@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { useStudentStore } from "@/stores/student-store";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { SpeechBubble } from "@/components/shared/SpeechBubble";
 import { t } from "@/lib/i18n";
 import { db } from "@/lib/db/local";
@@ -137,11 +137,11 @@ export function DailyHub({ onNavigate }: DailyHubProps) {
         </motion.button>
       </motion.div>
 
-      {/* Nuri's Tip */}
+      {/* Milo's Tip */}
       <motion.div variants={item}>
         <SpeechBubble
           text={tip}
-          label={t("hub.nuriTip", language)}
+          label={t("hub.miloTip", language)}
           className="bg-card"
         />
       </motion.div>

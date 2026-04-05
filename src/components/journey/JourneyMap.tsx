@@ -9,7 +9,7 @@ import {
   REGION_NAMES,
   TOPIC_PREREQUISITES,
 } from "@/lib/adaptive/engine";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { t } from "@/lib/i18n";
 import type { SkillRecord } from "@/lib/db/local";
 
@@ -183,14 +183,14 @@ export function JourneyMap({ onSelectTopic }: JourneyMapProps) {
                         transform: "translateX(-50%)",
                       }}
                     >
-                      {/* Nuri bouncing on current node */}
+                      {/* Milo bouncing on current node */}
                       {isCurrent && (
                         <motion.div
                           animate={{ y: [0, -5, 0] }}
                           transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut" }}
                           className="mb-1"
                         >
-                          <Nuri expression="happy" size={40} />
+                          <Milo expression="happy" size={40} />
                         </motion.div>
                       )}
 

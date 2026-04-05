@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { SUPPORTED_LANGUAGES } from "@/lib/i18n";
 import { useStudentStore } from "@/stores/student-store";
 
@@ -38,13 +38,13 @@ export function SplashLanguage({ onNext }: SplashLanguageProps) {
         Works Offline
       </motion.div>
 
-      {/* Nuri mascot */}
+      {/* Milo mascot */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
       >
-        <Nuri expression="happy" size={140} />
+        <Milo expression="happy" size={140} />
       </motion.div>
 
       {/* Title */}

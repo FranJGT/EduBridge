@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import {
   DIAGNOSTIC_PROBLEMS,
   runDiagnostic,
@@ -108,7 +108,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
         Challenge {currentIdx + 1} of {total}
       </p>
 
-      <Nuri expression="neutral" size={80} />
+      <Milo expression="neutral" size={80} />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -158,7 +158,7 @@ export function DiagnosticChallenge({ onComplete }: DiagnosticChallengeProps) {
       </div>
 
       <p className="text-xs text-muted text-center max-w-xs leading-relaxed">
-        It&apos;s okay to skip &mdash; this helps Nuri find the right level for
+        It&apos;s okay to skip &mdash; this helps Milo find the right level for
         you!
       </p>
     </div>

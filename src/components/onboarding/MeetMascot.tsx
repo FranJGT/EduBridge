@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 import { t } from "@/lib/i18n";
 import { useStudentStore } from "@/stores/student-store";
 
@@ -29,7 +29,7 @@ export function MeetMascot({ onNext }: MeetMascotProps) {
         animate={{ opacity: 1, x: 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
-        <Nuri expression="neutral" size={140} />
+        <Milo expression="neutral" size={140} />
       </motion.div>
 
       <motion.p
@@ -38,7 +38,7 @@ export function MeetMascot({ onNext }: MeetMascotProps) {
         transition={{ delay: 0.2 }}
         className="text-lg font-bold text-primary"
       >
-        Nuri
+        Milo
       </motion.p>
 
       <motion.div
@@ -49,7 +49,7 @@ export function MeetMascot({ onNext }: MeetMascotProps) {
       >
         <p className="text-center text-base text-foreground leading-relaxed">
           {t("onboarding.nameLabel", language) === "onboarding.nameLabel"
-            ? "Hi! I'm Nuri, your math guide. What should I call you?"
+            ? "Hi! I'm Milo, your math guide. What should I call you?"
             : t("onboarding.nameLabel", language)}
         </p>
       </motion.div>

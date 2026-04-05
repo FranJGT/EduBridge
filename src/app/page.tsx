@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useStudentStore } from "@/stores/student-store";
-import { Nuri } from "@/components/shared/Nuri";
+import { Milo } from "@/components/shared/Milo";
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };
@@ -38,9 +38,9 @@ export default function Home() {
             Works Offline
           </motion.div>
 
-          {/* Nuri mascot */}
+          {/* Milo mascot */}
           <motion.div variants={item}>
-            <Nuri expression="happy" size={140} />
+            <Milo expression="happy" size={140} />
           </motion.div>
 
           {/* Title */}
