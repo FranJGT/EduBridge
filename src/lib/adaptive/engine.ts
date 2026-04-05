@@ -1,36 +1,80 @@
 import { db, type SkillRecord } from "../db/local";
 import { getDifficultyCeiling } from "./level-map";
 
-export const TOPICS = [
-  "addition",
-  "subtraction",
-  "multiplication",
-  "division",
-  "fractions",
-  "word-problems",
-  "algebra",
+// Full curriculum: basics to university
+export const TRACKS = [
+  {
+    id: "foundations",
+    name: "Foundations",
+    ageRange: "5-10",
+    topics: ["counting", "addition", "subtraction", "multiplication", "division", "fractions"],
+  },
+  {
+    id: "middle",
+    name: "Middle School",
+    ageRange: "10-14",
+    topics: ["pre-algebra", "geometry-basics", "ratios", "intro-statistics"],
+  },
+  {
+    id: "high-school",
+    name: "High School",
+    ageRange: "14-18",
+    topics: ["algebra", "geometry", "trigonometry", "pre-calculus"],
+  },
+  {
+    id: "university",
+    name: "University",
+    ageRange: "17+",
+    topics: ["calculus-1", "calculus-2", "linear-algebra", "probability", "discrete-math"],
+  },
 ] as const;
+
+export const TOPICS = TRACKS.flatMap((t) => t.topics);
 
 export type MathTopic = (typeof TOPICS)[number];
 
 export const REGION_NAMES: Record<string, string> = {
-  addition: "Addition Meadows",
-  subtraction: "Subtraction Shores",
-  multiplication: "Multiplication Mountains",
-  division: "Division Desert",
-  fractions: "Fraction Forest",
-  "word-problems": "Word Problem Wonderland",
-  algebra: "Algebra Peak",
+  counting: "Counting & Numbers",
+  addition: "Addition",
+  subtraction: "Subtraction",
+  multiplication: "Multiplication",
+  division: "Division",
+  fractions: "Fractions & Decimals",
+  "pre-algebra": "Pre-Algebra",
+  "geometry-basics": "Geometry Basics",
+  ratios: "Ratios & Proportions",
+  "intro-statistics": "Intro to Statistics",
+  algebra: "Algebra I & II",
+  geometry: "Geometry",
+  trigonometry: "Trigonometry",
+  "pre-calculus": "Pre-Calculus",
+  "calculus-1": "Calculus I",
+  "calculus-2": "Calculus II",
+  "linear-algebra": "Linear Algebra",
+  probability: "Probability & Statistics",
+  "discrete-math": "Discrete Mathematics",
 };
 
 export const TOPIC_PREREQUISITES: Record<string, string[]> = {
-  addition: [],
+  counting: [],
+  addition: ["counting"],
   subtraction: ["addition"],
   multiplication: ["addition"],
   division: ["multiplication"],
   fractions: ["division"],
-  "word-problems": ["addition", "subtraction"],
-  algebra: ["fractions", "multiplication"],
+  "pre-algebra": ["fractions"],
+  "geometry-basics": ["fractions"],
+  ratios: ["fractions"],
+  "intro-statistics": ["ratios"],
+  algebra: ["pre-algebra"],
+  geometry: ["geometry-basics", "algebra"],
+  trigonometry: ["geometry", "algebra"],
+  "pre-calculus": ["trigonometry"],
+  "calculus-1": ["pre-calculus"],
+  "calculus-2": ["calculus-1"],
+  "linear-algebra": ["algebra"],
+  probability: ["intro-statistics", "algebra"],
+  "discrete-math": ["algebra"],
 };
 
 export async function getSkill(
@@ -61,19 +105,7 @@ export async function getSkill(
 export async function getStudentSkills(
   studentId: string
 ): Promise<SkillRecord[]> {
-  const skills = await db.skills
-    .where("studentId")
-    .equals(studentId)
-    .toArray();
-
-  for (const topic of TOPICS) {
-    if (!skills.find((s) => s.topic === topic)) {
-      const skill = await getSkill(studentId, topic);
-      skills.push(skill);
-    }
-  }
-
-  return skills;
+  return db.skills.where("studentId").equals(studentId).toArray();
 }
 
 export async function updateSkill(
@@ -102,19 +134,24 @@ export async function updateSkill(
 export async function selectNextTopic(studentId: string): Promise<string> {
   const skills = await getStudentSkills(studentId);
 
-  const candidates = skills
-    .filter((s) => {
-      const prereqs = TOPIC_PREREQUISITES[s.topic] ?? [];
+  const allTopics = TOPICS;
+  const candidates = allTopics
+    .filter((topic) => {
+      const prereqs = TOPIC_PREREQUISITES[topic] ?? [];
       return prereqs.every((p) => {
         const prereqSkill = skills.find((sk) => sk.topic === p);
         return prereqSkill && prereqSkill.level >= 3;
       });
     })
-    .map((s) => ({
-      ...s,
-      score:
-        Math.abs(0.7 - (s.accuracy || 0.5)) * -1 + (s.level < 8 ? 0.5 : 0),
-    }))
+    .map((topic) => {
+      const s = skills.find((sk) => sk.topic === topic);
+      const level = s?.level ?? 1;
+      const accuracy = s?.accuracy ?? 0.5;
+      return {
+        topic,
+        score: Math.abs(0.7 - accuracy) * -1 + (level < 8 ? 0.5 : 0),
+      };
+    })
     .sort((a, b) => b.score - a.score);
 
   return candidates[0]?.topic ?? "addition";
@@ -134,9 +171,13 @@ export function isMastered(skill: SkillRecord): boolean {
 }
 
 export function getNextRegion(currentTopic: string): string | null {
-  const idx = TOPICS.indexOf(currentTopic as MathTopic);
+  const idx = TOPICS.indexOf(currentTopic as typeof TOPICS[number]);
   if (idx < 0 || idx >= TOPICS.length - 1) return null;
   return TOPICS[idx + 1];
+}
+
+export function getTrackForTopic(topic: string): (typeof TRACKS)[number] | undefined {
+  return TRACKS.find((t) => (t.topics as readonly string[]).includes(topic));
 }
 
 export async function getStreak(studentId: string): Promise<number> {

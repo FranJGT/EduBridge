@@ -9,7 +9,13 @@ interface AgeSelectorProps {
   onNext: () => void;
 }
 
-const AGES = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const AGE_GROUPS = [
+  { label: "5-10", value: 8, desc: "Elementary" },
+  { label: "11-14", value: 12, desc: "Middle School" },
+  { label: "15-18", value: 16, desc: "High School" },
+  { label: "18-25", value: 20, desc: "University" },
+  { label: "25+", value: 30, desc: "Lifelong Learner" },
+];
 
 export function AgeSelector({ onNext }: AgeSelectorProps) {
   const { studentName, language, age, setAge } = useStudentStore();
@@ -39,23 +45,33 @@ export function AgeSelector({ onNext }: AgeSelectorProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="grid grid-cols-6 gap-3 max-w-xs"
+        className="flex flex-col gap-3 w-full max-w-sm"
       >
-        {AGES.map((a, i) => (
+        {AGE_GROUPS.map((group, i) => (
           <motion.button
-            key={a}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.4 + i * 0.03, type: "spring" }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setAge(a)}
-            className={`w-14 h-14 rounded-full text-lg font-semibold transition-all ${
-              age === a
+            key={group.value}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 + i * 0.06 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setAge(group.value)}
+            className={`flex items-center justify-between px-5 py-4 rounded-xl text-left transition-all ${
+              age === group.value
                 ? "bg-primary text-white shadow-md"
                 : "bg-card border border-border text-foreground hover:border-primary/50"
             }`}
           >
-            {a}
+            <div>
+              <span className="text-lg font-bold">{group.label}</span>
+              <span className={`text-sm ml-2 ${age === group.value ? "text-white/70" : "text-muted"}`}>
+                {group.desc}
+              </span>
+            </div>
+            {age === group.value && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            )}
           </motion.button>
         ))}
       </motion.div>
