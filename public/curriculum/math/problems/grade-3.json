@@ -1,0 +1,112 @@
+[
+  {
+    "id": "m-g3-add-001",
+    "topic": "addition",
+    "difficulty": 3,
+    "gradeLevel": 3,
+    "statement": "A bakery made 247 cupcakes in the morning and 385 cupcakes in the afternoon. How many cupcakes did they make in total?",
+    "answer": 632,
+    "hints": ["Add the hundreds first: 200 + 300", "Then add the tens: 40 + 80", "Don't forget to carry over!"],
+    "solutionSteps": ["247 + 385", "200 + 300 = 500", "40 + 80 = 120", "7 + 5 = 12", "500 + 120 + 12 = 632"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-add-002",
+    "topic": "addition",
+    "difficulty": 2,
+    "gradeLevel": 3,
+    "statement": "Maria has 56 stickers and her friend gives her 38 more. How many stickers does Maria have now?",
+    "answer": 94,
+    "hints": ["Start with 56 and add 38", "You can break 38 into 30 + 8", "56 + 30 = 86, then add 8 more"],
+    "solutionSteps": ["56 + 38", "56 + 30 = 86", "86 + 8 = 94"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-sub-001",
+    "topic": "subtraction",
+    "difficulty": 3,
+    "gradeLevel": 3,
+    "statement": "A toy store had 523 toys. They sold 287 toys during the sale. How many toys are left?",
+    "answer": 236,
+    "hints": ["We need to subtract: 523 - 287", "Start from the ones place: 3 - 7 requires borrowing", "Borrow from the tens place"],
+    "solutionSteps": ["523 - 287", "13 - 7 = 6 (borrowed from tens)", "11 - 8 = 3 (borrowed from hundreds)", "4 - 2 = 2", "Answer: 236"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-mult-001",
+    "topic": "multiplication",
+    "difficulty": 3,
+    "gradeLevel": 3,
+    "statement": "A farmer plants 12 rows of apple trees with 8 trees in each row. How many apple trees are there in total?",
+    "answer": 96,
+    "hints": ["This is 12 groups of 8", "You can break it into (10 x 8) + (2 x 8)", "10 x 8 = 80"],
+    "solutionSteps": ["12 x 8", "10 x 8 = 80", "2 x 8 = 16", "80 + 16 = 96"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-mult-002",
+    "topic": "multiplication",
+    "difficulty": 2,
+    "gradeLevel": 3,
+    "statement": "There are 7 bags with 6 oranges in each bag. How many oranges are there altogether?",
+    "answer": 42,
+    "hints": ["Count 6 seven times", "You can use skip counting: 6, 12, 18...", "Or think of it as 7 x 6"],
+    "solutionSteps": ["7 x 6", "= 42"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-div-001",
+    "topic": "division",
+    "difficulty": 3,
+    "gradeLevel": 3,
+    "statement": "48 students need to be divided equally into 6 teams. How many students will be on each team?",
+    "answer": 8,
+    "hints": ["We need to share 48 equally among 6 groups", "Think: 6 times what number equals 48?", "Try counting by 6s: 6, 12, 18, 24, 30, 36, 42, 48"],
+    "solutionSteps": ["48 / 6", "6 x 8 = 48", "So 48 / 6 = 8"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-add-003",
+    "topic": "addition",
+    "difficulty": 4,
+    "gradeLevel": 3,
+    "statement": "A school collected 1,248 books in January and 976 books in February for their library. How many books did they collect in total?",
+    "answer": 2224,
+    "hints": ["Add the thousands first", "1,248 + 976 - start from the ones place", "Remember to carry when digits add up to more than 9"],
+    "solutionSteps": ["1,248 + 976", "8 + 6 = 14, write 4, carry 1", "4 + 7 + 1 = 12, write 2, carry 1", "2 + 9 + 1 = 12, write 2, carry 1", "1 + 0 + 1 = 2", "Answer: 2,224"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-word-001",
+    "topic": "word-problems",
+    "difficulty": 4,
+    "gradeLevel": 3,
+    "statement": "Carlos has 3 shelves of books. Each shelf has 15 books. He gives away 12 books to his friend. How many books does Carlos have now?",
+    "answer": 33,
+    "hints": ["First find the total: 3 shelves x 15 books each", "Then subtract the books he gave away", "3 x 15 = 45, then 45 - 12 = ?"],
+    "solutionSteps": ["Step 1: Total books = 3 x 15 = 45", "Step 2: Books remaining = 45 - 12 = 33"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-sub-002",
+    "topic": "subtraction",
+    "difficulty": 2,
+    "gradeLevel": 3,
+    "statement": "A bus has 75 seats. If 48 people are sitting, how many empty seats are there?",
+    "answer": 27,
+    "hints": ["Subtract the people from the total seats", "75 - 48", "Start from the ones: 5 - 8 needs borrowing"],
+    "solutionSteps": ["75 - 48", "15 - 8 = 7 (borrowed from tens)", "6 - 4 = 2", "Answer: 27"],
+    "language": "en"
+  },
+  {
+    "id": "m-g3-frac-001",
+    "topic": "fractions",
+    "difficulty": 3,
+    "gradeLevel": 3,
+    "statement": "A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza did you eat?",
+    "answer": 0.375,
+    "hints": ["The total number of slices is the denominator", "The slices you ate is the numerator", "The fraction is 3/8"],
+    "solutionSteps": ["Total slices = 8", "Slices eaten = 3", "Fraction = 3/8 = 0.375"],
+    "language": "en"
+  }
+]
