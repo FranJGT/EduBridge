@@ -41,7 +41,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased light`}
+      style={{ colorScheme: "light" }}
     >
       <head>
         <link rel="icon" href="/icons/icon-192x192.png" />

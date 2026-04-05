@@ -34,7 +34,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* Dark mode disabled for now - force light mode */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #000000;
     --foreground: #FFFFFF;
@@ -45,7 +46,7 @@
     --text-secondary: #D1D5DB;
     --text-tertiary: #9CA3AF;
   }
-}
+} */
 
 body {
   background: var(--background);

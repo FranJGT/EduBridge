@@ -30,7 +30,7 @@ export default function Home() {
             <h1 className="text-5xl font-black text-foreground tracking-tight leading-none">
               EduBridge
             </h1>
-            <p className="text-lg text-[#374151] leading-relaxed font-light">
+            <p className="text-lg text-foreground/70 leading-relaxed font-light">
               Math mastery from counting to calculus.
               <br />
               <span className="text-muted">Powered by AI. Works offline.</span>
@@ -58,7 +58,7 @@ export default function Home() {
           {/* Features — subtle pills */}
           <motion.div variants={item} className="flex flex-wrap justify-center gap-2">
             {["Scan handwriting", "6 languages", "Adapts to you", "Works offline"].map((f) => (
-              <span key={f} className="px-3.5 py-1.5 rounded-lg bg-card border border-border text-xs font-medium text-[#374151]">
+              <span key={f} className="px-3.5 py-1.5 rounded-lg bg-card border border-border text-xs font-medium text-foreground/70">
                 {f}
               </span>
             ))}
@@ -80,7 +80,7 @@ export default function Home() {
             <Link href="/dashboard">
               <motion.div
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center justify-center h-11 rounded-xl text-muted font-medium text-sm hover:text-[#374151] transition-colors"
+                className="flex items-center justify-center h-11 rounded-xl text-muted font-medium text-sm hover:text-foreground/70 transition-colors"
               >
                 Parent & Teacher Dashboard
               </motion.div>
